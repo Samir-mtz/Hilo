@@ -2,29 +2,31 @@ import random
 
 
 class Card:
-    """A small cube with a different number of spots on each of its six sides.
+    """A card with a different value between 1 and 13.
 
-    The responsibility of Die is to keep track of the side facing up and calculate the points for 
+    The responsibility of Card is to keep track of the values of the cards and calculate the points for 
     it.
-   
-    Attributes:
-        value (int): The number of spots on the side facing up.
     """
 
     def __init__(self):
-        """Constructs a new instance of Die.
+        """Constructs a new instance of Card.
 
         Args:
-            self (Die): An instance of Die.
+            self (Card): An instance of Card.
         """
         self.value = 0
         self.points = 0
 
-    def new_card(self):
-        """Generates a new random value and calculates the points for the die.
-        
+    def first_card(self):
+        """Generates a new random value for the first card"""
+        self.value = random.randint(1, 13)
+
+    def next_card(self, answer):
+        """Generates a new random value for the second card and calculates the points according to user's answer
         Args:
-            self (Die): An instance of Die.
+            self (Card): An instance of Card.
+            answer (string): higher or lower (h/l).
         """
-        self.value = random.randint(1, 6)
-        self.points = 50 if self.value == 5 else 100 if self.value == 1 else 0
+        new_card = random.randint(1, 13)
+        correct_answer = "l" if new_card < self.value else "h"
+        self.points = 100 if correct_answer == answer else -75
