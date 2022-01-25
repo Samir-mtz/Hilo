@@ -1,5 +1,6 @@
 
 from game.card import Card
+import random
 
 
 class Dealer:
@@ -20,14 +21,14 @@ class Dealer:
         Args:
             self (Dealer): an instance of Dealer.
         """
-        self.deck = []
+        self.cards = []
         self.is_playing = True
         self.score = 0
-        self.total_score = 0
+        self.total_score = 300
+        self.hi_lo = ""
 
-        for i in range(13):
-            card = Card()
-            self.deck.append(card)
+        card = Card()
+        self.cards.append(card)
 
     def start_game(self):
         """Starts the game by running the main game loop.
@@ -35,6 +36,7 @@ class Dealer:
         Args:
             self (Director): an instance of Director.
         """
+
         while self.is_playing:
             self.get_inputs()
             self.do_updates()
@@ -46,8 +48,8 @@ class Dealer:
         Args:
             self (Dealer): An instance of Dealer.
         """
-        hi_lo = input("Higher or Lower? [h/l] ")
-        self.is_playing = (hi_lo == "y")
+        flip_card = input("Flip a card? [y/n]").lower()
+        self.is_playing = (flip_card == "y")
        
     def do_updates(self):
         """Updates the player's score.
@@ -58,11 +60,9 @@ class Dealer:
         if not self.is_playing:
             return 
 
-        for i in range(len(self.deck)):
-            card = self.deck[i]
-            card.roll()
-            self.score += card.points 
-        self.total_score += self.score
+        card = self.cards[0]
+        card.next_card() 
+        self.total_score += card.points
 
     def do_outputs(self):
         """Displays the card and the score. Also asks the player if they want to play again. 
@@ -74,13 +74,9 @@ class Dealer:
             return
 
         values = ""
-        for i in range(len(self.deck)):
-            card = self.deck[i]
-            values += f"{card.value} "
+        card = self.cards[0]
+        values += f"{card.value} "
 
-        print(f"The card is: {values}")
         print(f"Your score is: {self.total_score}\n")
         self.is_playing == (self.score > 0)
-        play_again = input("Would you like to play again? (y/n) ")
-        self.is_playing = (play_again == "y")
         

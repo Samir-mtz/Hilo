@@ -17,16 +17,17 @@ class Card:
         self.value = 0
         self.points = 0
 
-    def first_card(self):
-        """Generates a new random value for the first card"""
-        self.value = random.randint(1, 13)
-
-    def next_card(self, answer):
+    def next_card(self):
         """Generates a new random value for the second card and calculates the points according to user's answer
         Args:
             self (Card): An instance of Card.
             answer (string): higher or lower (h/l).
-        """
+         """
+
+        first_card = random.randint(1,13)
+        print(f"Card showing is a {first_card}.")
+        hi_lo = (input("Will the next card be higher or lower? [h/l] ")).lower()
         new_card = random.randint(1, 13)
-        correct_answer = "l" if new_card < self.value else "h"
-        self.points = 100 if correct_answer == answer else -75
+        print(f"Your next card is a {new_card}.")
+        correct_answer = "l" if new_card < first_card else "h"
+        self.points = 100 if correct_answer == hi_lo else (-75)
