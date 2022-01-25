@@ -1,6 +1,6 @@
 
 from game.card import Card
-import random
+
 
 
 class Dealer:
@@ -9,7 +9,7 @@ class Dealer:
     The responsibility of a Dealer is to control the sequence of play.
 
     Attributes:
-        card (Card): A instances od Card().
+        card (Card): A instances of Card().
         is_playing (boolean): Whether or not the game is being played.
         total_score (int): The score for the entire game.
     """
@@ -49,7 +49,7 @@ class Dealer:
         """Updates the player's score.
 
         Args:
-            self (Director): An instance of Director.
+            self (Dealer): An instance of Dealer.
         """
         self.total_score += self.card.points
 
