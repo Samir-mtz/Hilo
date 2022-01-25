@@ -42,3 +42,4 @@ root                    (project root folder)
 ## Authors
 ---
 * Armando Martinez (mar21095@byui.edu)
+* Heidi Munson (mun21014@byui.edu)
