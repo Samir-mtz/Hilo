@@ -14,20 +14,23 @@ class Card:
         Args:
             self (Card): An instance of Card.
         """
-        self.value = 0
         self.points = 0
+        self.value = 0
 
-    def next_card(self):
+    def generate_card(self):
+        self.value = random.randint(1,13)
+        return self.value
+
+    def next_card(self, hi_lo):
         """Generates a new random value for the second card and calculates the points according to user's answer
         Args:
             self (Card): An instance of Card.
-            answer (string): higher or lower (h/l).
-         """
+            hi_lo (string): higher or lower (h/l).
+        """
+        new_card = self.value
+        while(new_card == self.value): #This makes sure that the value is higher or lower but not equal to the first card.
+            new_card = random.randint(1,13)
 
-        first_card = random.randint(1,13)
-        print(f"Card showing is a {first_card}.")
-        hi_lo = (input("Will the next card be higher or lower? [h/l] ")).lower()
-        new_card = random.randint(1, 13)
-        print(f"Your next card is a {new_card}.")
-        correct_answer = "l" if new_card < first_card else "h"
+        correct_answer = "l" if new_card < self.value else "h"
         self.points = 100 if correct_answer == hi_lo else (-75)
+        return new_card
